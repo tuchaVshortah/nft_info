@@ -1,6 +1,5 @@
 import psycopg2
 from json import *
-from flask import Flask
 import argparse
 import requests
 
@@ -17,7 +16,7 @@ def saveResponse(file, response):
     file.write(response)
 
 
-def main(): 
+def nft_info(): 
     parser = argparse.ArgumentParser(prog="nftinfo", description="A tool to get information about NFT tokens")
     search_methods = parser.add_mutually_exclusive_group()
 
@@ -206,4 +205,4 @@ def main():
     cursor = conn.cursor()
     """
 
-main()
+nft_info()
