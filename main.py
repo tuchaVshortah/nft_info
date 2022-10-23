@@ -1,4 +1,5 @@
 import psycopg2
+from json import *
 from flask import Flask
 import argparse
 import requests
@@ -7,6 +8,14 @@ import requests
 def main(): 
     parser = argparse.ArgumentParser(prog="nftinfo", description="A tool to get information about NFT tokens")
     search_methods = parser.add_mutually_exclusive_group()
+
+    parser.add_argument(
+        "-k", "--moralis-api-key",
+        help="Specify your API key for moralis.io",
+        default=None,
+        type=str,
+        nargs=1
+    )
 
     search_methods.add_argument(
         "-b", "--block",
@@ -65,7 +74,59 @@ def main():
     )
 
     args = parser.parse_args()
+
+    headers = {
+        "accept": "application/json",
+        "X-API-Key": "test"
+    }
+
+    if(args.moralis_api_key is not None):
+
+        moralis_api_key = args.moralis_api_key[0]
+
+        headers["X-API-Key"] = moralis_api_key
+
     
+    if(args.block is not None):
+        block = args.block[0]
+
+        url = "https://deep-index.moralis.io/api/v2/block/" + block + "/nft/transfers?chain=eth&limit=100"        
+        response = requests.get(url, headers=headers)
+
+        response_data = response.json()
+        pretty_response = dumps(response_data, indent=2)
+        
+        response = pretty_response
+
+        print(response)
+
+    if(args.address_nfts is not None):
+        address = args.address_nfts[0]
+
+        url = "https://deep-index.moralis.io/api/v2/" + address + "/nft?chain=eth&format=decimal"
+        response = requests.get(url, headers=headers)
+
+        response_data = response.json()
+        pretty_response = dumps(response_data, indent=2)
+        
+        response = pretty_response
+
+        print(response)
+
+    if(args.search is not None):
+        search = args.search[0]
+
+        url = "https://deep-index.moralis.io/api/v2/nft/search?chain=eth&format=decimal&q=" + search + "&filter=global"
+        response = requests.get(url, headers=headers)
+
+        response_data = response.json()
+        pretty_response = dumps(response_data, indent=2)
+        
+        response = pretty_response
+
+        print(response)
+    
+
     """
     conn = psycopg2.connect(dbname="nftdb", user="postgres", 
                             password="root", host="localhost", port=5432)
