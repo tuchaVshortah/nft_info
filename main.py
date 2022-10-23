@@ -4,7 +4,6 @@ from flask import Flask
 import argparse
 import requests
 
-
 def get(url, headers):
     response = requests.get(url, headers=headers)
 
@@ -12,6 +11,10 @@ def get(url, headers):
     pretty_response = dumps(response_data, indent=2)
     
     return pretty_response
+
+
+def saveResponse(file, response):
+    file.write(response)
 
 
 def main(): 
@@ -24,6 +27,14 @@ def main():
         default=None,
         type=str,
         nargs=1
+    )
+
+    parser.add_argument(
+        "-f", "--file",
+        help="Save results to the specified file",
+        default=None,
+        nargs="?",
+        type=argparse.FileType(mode="a+",encoding="utf-8")
     )
 
     parser.add_argument(
@@ -112,6 +123,9 @@ def main():
         if(not args.quiet):
             print(response)
 
+        if(args.file is not None):
+            saveResponse(args.file, response)
+
     elif(args.address_nfts is not None):
         address = args.address_nfts[0]
 
@@ -120,6 +134,9 @@ def main():
 
         if(not args.quiet):
             print(response)
+
+        if(args.file is not None):
+            saveResponse(args.file, response)
 
     elif(args.address_nft_transfers is not None):
         address = args.address_nft_transfers[0]
@@ -130,6 +147,9 @@ def main():
         if(not args.quiet):
             print(response)
 
+        if(args.file is not None):
+            saveResponse(args.file, response)
+
     elif(args.address_nft_collections is not None):
         address = args.address_nft_collections[0]
 
@@ -138,6 +158,9 @@ def main():
 
         if(not args.quiet):
             print(response)
+
+        if(args.file is not None):
+            saveResponse(args.file, response)
 
     elif(args.address_nft_trades is not None):
         address = args.address_nft_trades[0]
@@ -148,6 +171,9 @@ def main():
         if(not args.quiet):
             print(response)
 
+        if(args.file is not None):
+            saveResponse(args.file, response)
+
     elif(args.address_nft_lprice):
         address = args.address_nft_lprice[0]
 
@@ -157,6 +183,9 @@ def main():
         if(not args.quiet):
             print(response)
 
+        if(args.file is not None):
+            saveResponse(args.file, response)
+
     elif(args.search is not None):
         search = args.search[0]
 
@@ -165,6 +194,9 @@ def main():
 
         if(not args.quiet):
             print(response)
+
+        if(args.file is not None):
+            saveResponse(args.file, response)
     
 
     """
