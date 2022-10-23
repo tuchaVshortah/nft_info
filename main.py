@@ -100,7 +100,7 @@ def main():
 
         print(response)
 
-    if(args.address_nfts is not None):
+    elif(args.address_nfts is not None):
         address = args.address_nfts[0]
 
         url = "https://deep-index.moralis.io/api/v2/" + address + "/nft?chain=eth&format=decimal"
@@ -113,7 +113,59 @@ def main():
 
         print(response)
 
-    if(args.search is not None):
+    elif(args.address_nft_transfers is not None):
+        address = args.address_nft_transfers[0]
+
+        url = "https://deep-index.moralis.io/api/v2/"+ address + "/nft/transfers"
+        response = requests.get(url, headers=headers)
+
+        response_data = response.json()
+        pretty_response = dumps(response_data, indent=2)
+        
+        response = pretty_response
+
+        print(response)
+
+    elif(args.address_nft_collections is not None):
+        address = args.address_nft_collections[0]
+
+        url = "https://deep-index.moralis.io/api/v2/" + address + "/nft/collections"
+        response = requests.get(url, headers=headers)
+
+        response_data = response.json()
+        pretty_response = dumps(response_data, indent=2)
+        
+        response = pretty_response
+
+        print(response)
+
+    elif(args.address_nft_trades is not None):
+        address = args.address_nft_trades[0]
+
+        url = "https://deep-index.moralis.io/api/v2/nft/" + address + "/trades"
+        response = requests.get(url, headers=headers)
+
+        response_data = response.json()
+        pretty_response = dumps(response_data, indent=2)
+        
+        response = pretty_response
+
+        print(response)
+
+    elif(args.address_nft_lprice):
+        address = args.address_nft_lprice[0]
+
+        url = "https://deep-index.moralis.io/api/v2/nft/" + address + "/lowestprice"
+        response = requests.get(url, headers=headers)
+
+        response_data = response.json()
+        pretty_response = dumps(response_data, indent=2)
+        
+        response = pretty_response
+
+        print(response)
+
+    elif(args.search is not None):
         search = args.search[0]
 
         url = "https://deep-index.moralis.io/api/v2/nft/search?chain=eth&format=decimal&q=" + search + "&filter=global"
