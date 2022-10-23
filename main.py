@@ -23,14 +23,14 @@ def main():
     )
 
     search_methods.add_argument(
-        "-AT", "--address-nft-transfers",
+        "-At", "--address-nft-transfers",
         help="Get NFT transfers by wallet",
         type=str,
         nargs=1
     )
 
     search_methods.add_argument(
-        "-AC", "--address-nft-collections",
+        "-Ac", "--address-nft-collections",
         help="Get collections by wallet",
         type=str,
         nargs=1
@@ -44,7 +44,7 @@ def main():
     )
 
     search_methods.add_argument(
-        "-AL", "--address-nft-lprice",
+        "-Al", "--address-nft-lprice",
         help="Get lowest price",
         type=str,
         nargs=1
@@ -57,8 +57,7 @@ def main():
         nargs="+"
     )
 
-    
-
+    args = parser.parse_args()
     
     """
     conn = psycopg2.connect(dbname="nftdb", user="postgres", 
@@ -67,3 +66,4 @@ def main():
     cursor = conn.cursor()
     """
 
+main()
