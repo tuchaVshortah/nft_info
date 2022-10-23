@@ -5,6 +5,15 @@ import argparse
 import requests
 
 
+def get(url, headers):
+    response = requests.get(url, headers=headers)
+
+    response_data = response.json()
+    pretty_response = dumps(response_data, indent=2)
+    
+    return pretty_response
+
+
 def main(): 
     parser = argparse.ArgumentParser(prog="nftinfo", description="A tool to get information about NFT tokens")
     search_methods = parser.add_mutually_exclusive_group()
@@ -15,6 +24,13 @@ def main():
         default=None,
         type=str,
         nargs=1
+    )
+
+    parser.add_argument(
+        "-q", "--quiet",
+        help="Do not show any output in the terminal",
+        default=False,
+        action="store_true"
     )
 
     search_methods.add_argument(
@@ -91,92 +107,64 @@ def main():
         block = args.block[0]
 
         url = "https://deep-index.moralis.io/api/v2/block/" + block + "/nft/transfers?chain=eth&limit=100"        
-        response = requests.get(url, headers=headers)
+        response = get(url, headers)
 
-        response_data = response.json()
-        pretty_response = dumps(response_data, indent=2)
-        
-        response = pretty_response
-
-        print(response)
+        if(not args.quiet):
+            print(response)
 
     elif(args.address_nfts is not None):
         address = args.address_nfts[0]
 
         url = "https://deep-index.moralis.io/api/v2/" + address + "/nft?chain=eth&format=decimal"
-        response = requests.get(url, headers=headers)
+        response = get(url, headers)
 
-        response_data = response.json()
-        pretty_response = dumps(response_data, indent=2)
-        
-        response = pretty_response
-
-        print(response)
+        if(not args.quiet):
+            print(response)
 
     elif(args.address_nft_transfers is not None):
         address = args.address_nft_transfers[0]
 
         url = "https://deep-index.moralis.io/api/v2/"+ address + "/nft/transfers"
-        response = requests.get(url, headers=headers)
+        response = get(url, headers)
 
-        response_data = response.json()
-        pretty_response = dumps(response_data, indent=2)
-        
-        response = pretty_response
-
-        print(response)
+        if(not args.quiet):
+            print(response)
 
     elif(args.address_nft_collections is not None):
         address = args.address_nft_collections[0]
 
         url = "https://deep-index.moralis.io/api/v2/" + address + "/nft/collections"
-        response = requests.get(url, headers=headers)
+        response = get(url, headers)
 
-        response_data = response.json()
-        pretty_response = dumps(response_data, indent=2)
-        
-        response = pretty_response
-
-        print(response)
+        if(not args.quiet):
+            print(response)
 
     elif(args.address_nft_trades is not None):
         address = args.address_nft_trades[0]
 
         url = "https://deep-index.moralis.io/api/v2/nft/" + address + "/trades"
-        response = requests.get(url, headers=headers)
+        response = get(url, headers)
 
-        response_data = response.json()
-        pretty_response = dumps(response_data, indent=2)
-        
-        response = pretty_response
-
-        print(response)
+        if(not args.quiet):
+            print(response)
 
     elif(args.address_nft_lprice):
         address = args.address_nft_lprice[0]
 
         url = "https://deep-index.moralis.io/api/v2/nft/" + address + "/lowestprice"
-        response = requests.get(url, headers=headers)
+        response = get(url, headers)
 
-        response_data = response.json()
-        pretty_response = dumps(response_data, indent=2)
-        
-        response = pretty_response
-
-        print(response)
+        if(not args.quiet):
+            print(response)
 
     elif(args.search is not None):
         search = args.search[0]
 
         url = "https://deep-index.moralis.io/api/v2/nft/search?chain=eth&format=decimal&q=" + search + "&filter=global"
-        response = requests.get(url, headers=headers)
+        response = get(url, headers)
 
-        response_data = response.json()
-        pretty_response = dumps(response_data, indent=2)
-        
-        response = pretty_response
-
-        print(response)
+        if(not args.quiet):
+            print(response)
     
 
     """
