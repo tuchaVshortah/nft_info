@@ -11,6 +11,7 @@ def main():
     search_methods.add_argument(
         "-b", "--block",
         help="Get NFT transfers by block",
+        default=None,
         type=str,
         nargs=1
     )
@@ -18,6 +19,7 @@ def main():
     search_methods.add_argument(
         "-a", "--address-nfts",
         help="Get NFTs by wallet",
+        default=None,
         type=str,
         nargs=1
     )
@@ -25,6 +27,7 @@ def main():
     search_methods.add_argument(
         "-At", "--address-nft-transfers",
         help="Get NFT transfers by wallet",
+        default=None,
         type=str,
         nargs=1
     )
@@ -32,6 +35,7 @@ def main():
     search_methods.add_argument(
         "-Ac", "--address-nft-collections",
         help="Get collections by wallet",
+        default=None,
         type=str,
         nargs=1
     )
@@ -39,6 +43,7 @@ def main():
     search_methods.add_argument(
         "-AT", "--address-nft-trades",
         help="Get trades from opensea marketplace",
+        default=None,
         type=str,
         nargs=1
     )
@@ -46,6 +51,7 @@ def main():
     search_methods.add_argument(
         "-Al", "--address-nft-lprice",
         help="Get lowest price",
+        default=None,
         type=str,
         nargs=1
     )
@@ -53,6 +59,7 @@ def main():
     search_methods.add_argument(
         "-s", "--search",
         help="Search for a NFT token",
+        default=None,
         type=str,
         nargs="+"
     )
