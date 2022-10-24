@@ -15,9 +15,15 @@ def saveResponse(file, response):
     file.write(response)
 
 
-def nft_info(): 
+def nft_info(mode:str=None, argument: str=None): 
     parser = argparse.ArgumentParser(prog="nftinfo", description="A tool to get information about NFT tokens")
     search_methods = parser.add_mutually_exclusive_group()
+    args = lambda: None; args.moralis_api_key = None; args.file = None; args.quiet = None;\
+        args.block = None; args.address_nfts = None; args.address_nft_transfers = None;\
+            args.address_nft_collections = None; args.address_nft_trades = None;\
+                args.address_nft_lprice = None; args.search = None
+        
+    moduleMode = False
 
     parser.add_argument(
         "-k", "--moralis-api-key",
@@ -98,7 +104,14 @@ def nft_info():
         nargs="+"
     )
 
-    args = parser.parse_args()
+    if(mode is not None and argument is not None):
+        args.quiet = True
+        
+        if(mode == "search"):
+            args.search = [argument]
+        moduleMode = True
+    else:
+        args = parser.parse_args()
 
     headers = {
         "accept": "application/json",
@@ -123,6 +136,9 @@ def nft_info():
 
         if(args.file is not None):
             saveResponse(args.file, response)
+        
+        if(moduleMode):
+            return response
 
     elif(args.address_nfts is not None):
         address = args.address_nfts[0]
@@ -136,6 +152,9 @@ def nft_info():
         if(args.file is not None):
             saveResponse(args.file, response)
 
+        if(moduleMode):
+            return response
+
     elif(args.address_nft_transfers is not None):
         address = args.address_nft_transfers[0]
 
@@ -147,6 +166,9 @@ def nft_info():
 
         if(args.file is not None):
             saveResponse(args.file, response)
+
+        if(moduleMode):
+            return response
 
     elif(args.address_nft_collections is not None):
         address = args.address_nft_collections[0]
@@ -160,6 +182,9 @@ def nft_info():
         if(args.file is not None):
             saveResponse(args.file, response)
 
+        if(moduleMode):
+            return response
+
     elif(args.address_nft_trades is not None):
         address = args.address_nft_trades[0]
 
@@ -171,6 +196,9 @@ def nft_info():
 
         if(args.file is not None):
             saveResponse(args.file, response)
+
+        if(moduleMode):
+            return response
 
     elif(args.address_nft_lprice):
         address = args.address_nft_lprice[0]
@@ -184,6 +212,9 @@ def nft_info():
         if(args.file is not None):
             saveResponse(args.file, response)
 
+        if(moduleMode):
+            return response
+
     elif(args.search is not None):
         search = args.search[0]
 
@@ -196,4 +227,5 @@ def nft_info():
         if(args.file is not None):
             saveResponse(args.file, response)
 
-nft_info()
+        if(moduleMode):
+            return response
