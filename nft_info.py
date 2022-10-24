@@ -1,4 +1,3 @@
-import psycopg2
 from json import *
 import argparse
 import requests
@@ -196,13 +195,5 @@ def nft_info():
 
         if(args.file is not None):
             saveResponse(args.file, response)
-    
-
-    """
-    conn = psycopg2.connect(dbname="nftdb", user="postgres", 
-                            password="root", host="localhost", port=5432)
-
-    cursor = conn.cursor()
-    """
 
 nft_info()
