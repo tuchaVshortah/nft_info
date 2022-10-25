@@ -29,8 +29,8 @@ Usage:
   **10. You can hover your mouse on thumbnails -> this will show you a mini description of the token**
   
   **11. You can click an image to go to the source site -> you will be redirected to the source of the image and view it in the full quality**
-_
-Attention! Data is automatically saved in the database_
+
+Attention! Data is automatically saved in the database
 
 Examples:
 ![Screenshot_20221025_165434](https://user-images.githubusercontent.com/71591558/197755310-1720ce80-509a-43b1-b5c5-9704597ba977.png)
