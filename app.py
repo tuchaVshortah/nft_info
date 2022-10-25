@@ -3,15 +3,18 @@ import handler
 from validators import url, ValidationFailure
 import json
 
+import db
+
 app = Flask(__name__)
 
-@app.route("/search.html")
-@app.route("/")
+@app.route("/search", methods=["GET"])
+@app.route("/search.html", methods=["GET"])
+@app.route("/", methods=["GET"])
 def index():
 
     return render_template("index.html")
 
-@app.route("/search", methods=["GET", "POST"])
+@app.route("/search", methods=["POST"])
 def search():
 
     
@@ -24,11 +27,15 @@ def search():
     for element in result["result"]:
         metadata_nested = json.loads(element["metadata"])
 
-
+        token_id = 0
         name = "no name"
         image = "/static/broken_image.png"
         description = "No description"
         token_uri = "#"
+
+        
+        if("token_id" in element and element["token_id"] is not None):
+            token_id = element["token_id"]
 
 
         if("name" in metadata_nested and metadata_nested["name"] is not None):
@@ -50,7 +57,7 @@ def search():
 
 
         if("token_uri" in metadata_nested and metadata_nested["token_uri"] is not None):
-            token_uri = metadata_nested["token_uri"]
+            token_uri = element["token_uri"]
 
 
         try:
@@ -61,7 +68,8 @@ def search():
             
         
         new_element = {
-            "name": metadata_nested["name"],
+            "token_id": token_id,
+            "name": name,
             "image": image,
             "description": description,
             "token_uri": token_uri
@@ -70,6 +78,8 @@ def search():
 
         data.append(new_element)
 
+
+    db.save(data)
 
     return render_template("index.html", data=data)
 
