@@ -3,7 +3,7 @@
 Installation:
   1. Download the repository as you wish, suggested way -> git clone https://github.com/tuchaVshortah/nft_info.git
   2. cd into the directory where repository is located
-  3. Install requirements
+  3. Install requirements: in your terminal run -> pip install -r requirements.txt
 
 Usage:
   1. Start a local postgresql server (port 5432)
