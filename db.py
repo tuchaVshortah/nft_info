@@ -6,13 +6,16 @@ DEFAULT_TABLE_NAME = "tokens"
 CREATE_DATABASE_QUERY = "CREATE DATABASE " + DEFAULT_DATABSE_NAME
 CREATE_TABLE_QUERY  = "CREATE TABLE " + DEFAULT_TABLE_NAME + \
                         " (token_id TEXT PRIMARY KEY NOT NULL, \
+                            contract_type TEXT NOT NULL, \
+                            block_number_minted TEXT NOT NULL, \
+                            minter_addres TEXT NOT NULL, \
                             name TEXT NOT NULL, \
                             image TEXT NOT NULL, \
                             description TEXT NOT NULL, \
                             token_uri TEXT NOT NULL);"
 
-INSERT_DATA_QUERY = "INSERT INTO " + DEFAULT_TABLE_NAME + "(token_id, name, image, description, token_uri)" + \
-                    " VALUES (%s, %s, %s, %s, %s)"
+INSERT_DATA_QUERY = "INSERT INTO " + DEFAULT_TABLE_NAME + "(token_id, contract_type, block_number_minted, name, image, description, token_uri)" + \
+                    " VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
 POSTGRES_USER = "postgres"
 POSTGRES_PASSWORD = "root"
@@ -81,7 +84,7 @@ def save(data: list) -> bool:
 
     for element in data:
         
-        record_to_insert = (element["token_id"], element["name"], element["image"], element["description"], element["token_uri"])
+        record_to_insert = (element["token_id"], element["contract_type"], element["block_number_minted"], element["minter_address"], element["name"], element["image"], element["description"], element["token_uri"])
         #print(cursor.mogrify(INSERT_DATA_QUERY, (42, "ff", "ff", "ff", "ff")))
         try:
             cursor.execute(INSERT_DATA_QUERY, record_to_insert)

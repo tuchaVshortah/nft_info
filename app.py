@@ -27,7 +27,10 @@ def search():
     for element in result["result"]:
         metadata_nested = json.loads(element["metadata"])
 
-        token_id = 0
+        token_id = "NULL"
+        contract_type = "NULL"
+        block_number_minted = "NULL"
+        minter_address = "NULL"
         name = "no name"
         image = "/static/broken_image.png"
         description = "No description"
@@ -37,6 +40,15 @@ def search():
         if("token_id" in element and element["token_id"] is not None):
             token_id = element["token_id"]
 
+
+        if("contract_type" in element and element["contract_type"] is not None):
+            contract_type = element["contract_type"]
+
+        if("block_number_minted" in element and element["block_number_minted"] is not None):
+            block_number_minted = element["block_number_minted"]
+
+        if("minter_address" in element and element["minter_address"] is not None):
+            minter_address = element["minter_address"]
 
         if("name" in metadata_nested and metadata_nested["name"] is not None):
             name = metadata_nested["name"]
@@ -69,6 +81,9 @@ def search():
         
         new_element = {
             "token_id": token_id,
+            "contract_type": contract_type,
+            "block_number_minted": block_number_minted,
+            "minter_address": minter_address,
             "name": name,
             "image": image,
             "description": description,

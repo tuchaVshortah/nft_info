@@ -12,7 +12,7 @@
             <input class="form-control col-auto" type="text" name="search" placeholder="Search" aria-label="Search">
         </div>
         <div class="container-fluid col-auto">
-            <button class="btn btn-info col-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas" aria-controls="searchOffcanvas">Toggle right offcanvas</button>
+            <button class="btn btn-info col-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#searchOffcanvas" aria-controls="searchOffcanvas">Search</button>
         </div>
     </form>     
     <div class="d-grid gap-2">
@@ -21,6 +21,9 @@
                 <thead class="table-primary">
                     <tr>
                         <th>name</th>
+                        <th>contract_type</th>
+                        <th>block_number_minted</th>
+                        <th>minter_address</th>
                         <th>image</th>
                         <th>token_uri</th>
                     </tr>
@@ -30,6 +33,9 @@
                         {% for d in data %}
                             <tr>
                                 <td>{{ d["name"] }}</td>
+                                <td>{{ d["contract_type"] }}</td>
+                                <td>{{ d["block_number_minted"] }}</td>
+                                <td>{{ d["minter_address"] }}</td>
                                 <td><a href="{{ d['image'] }}" data-bs-toggle="tooltip" data-bs-title="{{ d['description'] }}"><img src="{{ d['image'] }}" style="max-width:75px; max-height: 75px" class="img-thumbnail"></a></td>
                                 <td><a href="{{ d['token_uri'] }}">Link</a></td>
                             </tr>
