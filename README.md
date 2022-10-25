@@ -20,3 +20,6 @@ Usage:
 Attention! Data is automatically saved in the database
 
 Examples:
+![Screenshot_20221025_165434](https://user-images.githubusercontent.com/71591558/197755310-1720ce80-509a-43b1-b5c5-9704597ba977.png)
+![Screenshot_20221025_165615](https://user-images.githubusercontent.com/71591558/197755539-209eebfb-6c8d-42de-b606-7d5b70c39ad2.png)
+![Screenshot_20221025_165718](https://user-images.githubusercontent.com/71591558/197755723-97bbb402-467c-476b-a396-050fae150166.png)
